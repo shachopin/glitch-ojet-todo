@@ -1,0 +1,65 @@
+<h1>
+  hello world
+</h1>
+
+<select id="basicSelect1" data-bind="ojComponent: {component: 'ojSelect', value: val, rootAttributes: {style:'max-width:60em'}}"> 
+  <!-- ko foreach: regions -->
+  <option data-bind="value:name, text:name"></option>
+  <!-- /ko -->
+</select>
+
+<div>
+   <label for="curr-value">Current selected value is  </label>
+   <span id="curr-value" data-bind="text: ko.toJSON(val)"></span>
+</div>
+
+
+
+<!--
+  this is how I did the searchBox:
+
+  <input id="inputSearch"
+           data-bind="attr: {placeholder: txtFilterServices}, ojComponent: {
+             component: 'ojInputSearch',
+             value: selectedService,
+             options: options,
+             optionChange: searchBoxUpdateEventHandler,
+             rootAttributes: {style:'max-width:40em'}}" autofocus/> 
+
+
+ self.selectedService = ko.observableArray();
+ self.options = ko.observableArray([{value:"all", label: allServices}]);
+ var originalArray = [];
+
+ self.roleEntities.push (roleEntity);
+ originalArray.push(roleEntity);
+ self.options.push({value:appId, label: serviceModel.getDisplayName()});
+ ....
+
+ self.searchBoxUpdateEventHandler = searchBoxUpdateEventHandler;
+
+  function searchBoxUpdateEventHandler(context, ui) 
+  {
+     if (ui.optionMetadata.trigger === "option_selected") 
+     { 
+        var selectedAppId = self.selectedService()[0];
+
+        if (selectedAppId === "all") 
+        {
+           self.roleEntities(originalArray);
+        } 
+        else 
+        {
+           var tempArray = originalArray.filter(function(roleEntity)
+           {
+              return roleEntity.appId === selectedAppId;
+           });
+            self.roleEntities(tempArray); 
+        }   
+
+        self.selectedService([]);
+     }
+  }
+  
+-->
+
