@@ -1,0 +1,46 @@
+<!--span id="curr-value" data-bind="text: ko.toJSON(val)"></span-->
+<h5>Number of Daily Todos: <span data-bind="text: numOfTodos"></span></h5>
+<h5>Your Daily Todos:</h5>
+
+<input id="combobox" placeholder="Enter your daily todos" autofocus
+         data-bind="ojComponent: {component: 'ojCombobox', options: weeklyTodos, 
+                                  multiple: true, value: val, optionChange: optionChangeHandler,
+                                  rootAttributes: {style:'max-width:100em; margin-bottom:10px;'}}"/>
+
+<!-- second way - using datalist -->
+<!--input id="combobox" list="browsers" 
+       data-bind="ojComponent: {component: 'ojCombobox',
+                                rootAttributes: {style:'max-width:20em'}}"/>
+<datalist id="browsers">
+ < ko foreach: browsers >
+ <option data-bind="value:value, text:label"></option>
+ < /ko >   
+</datalist-->
+
+<textarea id="todoText" style="resize:none" cols="45" rows="20" data-bind="attr: {placeholder: 'Enter your ' + (weeklyTodoChecked() ? 'weekly' : 'daily') + ' todo'}"></textarea>
+
+<div>
+  <button  style="margin-left:10px;margin-top:10px"
+           id="addToDo"
+           data-bind="click: handleAddButtonClick, 
+                      ojComponent:
+                      {
+                         component: 'ojButton',
+                         label: 'Add a todo'
+                      }"/>
+  <button  style="margin-left:10px;margin-top:10px"
+           id="clearToDo"
+           data-bind="click: handleClearButtonClick, 
+                      ojComponent:
+                      {
+                         component: 'ojButton',
+                         label: 'Clear All Daily Todos'
+                      }"/>
+</div>
+
+<label><input type="checkbox" data-bind="checked: weeklyTodoChecked" id="cbox1" value="first_checkbox"> To add weekly todos</label><br>
+
+
+
+
+
